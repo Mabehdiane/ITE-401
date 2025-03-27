@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Form Example with React.js</title>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.15.3/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #form-example {
+            background-color: #ff04ab;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            color: #000000;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #0c0c0c;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #9b9b9b;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            color: rgb(245, 245, 247);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        p {
+            color: #0073e6;
+        }
+    </style>
+</head>
+<body>
+    <div id="form-example"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const Form = () => {
+            const [idno, setIdno] = useState("");
+            const [name, setName] = useState("");
+            const [course, setCourse] = useState("");
+            const [displayInfo, setDisplayInfo] = useState(false);
+
+            const handleIdnoChange = (event) => {
+                setIdno(event.target.value);
+            };
+
+            const handleNameChange = (event) => {
+                setName(event.target.value);
+            };
+
+            const handleCourseChange = (event) => {
+                setCourse(event.target.value);
+            };
+
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                setDisplayInfo(true);
+            };
+
+            return (
+                <div>
+                    <h2>Platform of Technology</h2>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="idno">Enter ID Number:</label>
+                        <input type="text" id="idno" value={idno} onChange={handleIdnoChange} />
+                        <label htmlFor="name">Enter Name:</label>
+                        <input type="text" id="name" value={name} onChange={handleNameChange} />
+                        <label htmlFor="course">Enter Course:</label>
+                        <input type="text" id="course" value={course} onChange={handleCourseChange} />
+                        <button type="submit">
+                            Display Info
+                        </button>
+                    </form>
+                    {displayInfo && (
+                        <div style={{ marginTop: "10px" }}>
+                            <p>ID Number: {idno}</p>
+                            <p>Name: {name}</p>
+                            <p>Course: {course}</p>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<Form />, document.getElementById("form-example"));
+    </script>
+</body>
+</html>
